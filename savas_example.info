@@ -1,0 +1,5 @@
+name = Savas Example
+description = Provides an example CTools multi-step form in a block
+package = Examples
+core = 7.x
+dependencies[] = ctools
