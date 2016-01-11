@@ -21,13 +21,13 @@ function restaurant_reservation_multistep_block_info() {
 /**
  * Implements hook_block_view.
  */
-function restaurant_reservation_multistep_block_block_view($delta = '') {
+function restaurant_reservation_multistep_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {
     case 'restaurant_reservation_multistep':
         $block['subject'] = '';
-        $block['content'] = _restaurant_reservation_multistep_block_block_content();
+        $block['content'] = _restaurant_reservation_multistep_block_content();
         break;
     default:
         $block['subject'] = '';
@@ -36,7 +36,7 @@ function restaurant_reservation_multistep_block_block_view($delta = '') {
   return $block;
 }
 
-function _restaurant_reservation_multistep_block_block_content() {
+function _restaurant_reservation_multistep_block_content() {
   $output = t('Hello World!');
   return $output;
 }
