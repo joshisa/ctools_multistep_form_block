@@ -113,7 +113,6 @@ function cake_designer_form($form, $form_state) {
     // Bind an ajax callback to the change event.
     // Reference: https://api.drupal.org/api/examples/ajax_example!ajax_example.module/function/ajax_example_dependent_dropdown/7
     '#ajax' => array(
-      'event' => 'change',
       'callback' => 'restaurant_reservation_multistep_callback',
       'wrapper' => 'react-to-cake-type-change',
     )
