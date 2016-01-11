@@ -60,7 +60,7 @@ function restaurant_reservation_multistep_ctools_wizard($step) {
     'id' => 'multistep-form',
     'ajax' => TRUE,
     'path' => 'reservation?step=%step',
-    'show trail' => TRUE,
+    'show trail' => FALSE,
     'show back' => FALSE,
     'show return' => FALSE,
     'finish text' => t('All done! We know what you want and have started to work on your delicious customized sweet treat.'),
@@ -69,11 +69,9 @@ function restaurant_reservation_multistep_ctools_wizard($step) {
     'return callback' => 'restaurant_reservation_multistep_subtask_finish',
     'cancel callback' => 'restaurant_reservation_multistep_subtask_cancel',
     'order' => array(
-      'step-one' => t('Select your type of cake'),
-      'step-two' => t('Select your flavor'),
-      'step-three' => t('Select your filling'),
-      'step-four' => t('Select your icing'),
-      'step-five' => t('Select your design'),
+      'step-one' => t('Select your type, flavor and filling'),
+      'step-two' => t('Select your icing'),
+      'step-three' => t('Select your design'),
     ),
     'forms' => array(
       'step-one' => array(
@@ -84,12 +82,6 @@ function restaurant_reservation_multistep_ctools_wizard($step) {
       ),
       'step-three' => array(
         'form id' => 'restaurant_reservation_multistep_step_three_form',
-      ),
-      'step-four' => array(
-        'form id' => 'restaurant_reservation_multistep_step_four_form',
-      ),
-      'step-five' => array(
-        'form id' => 'restaurant_reservation_multistep_step_five_form',
       ),
     ),
   );
@@ -169,7 +161,6 @@ function restaurant_reservation_multistep_subtask_cancel() {
 function restaurant_reservation_multistep_subtask_finish() {
   restaurant_reservation_multistep_clear_page_cache('restaurant_reservation_multistep');
   drupal_set_message(t('Tip: Free smash cake for first birthdays with purchase of a special order cake'));
-  drupal_goto('<front>');
 }
 
 function _step_one_first_dropdown_options() {
