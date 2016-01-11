@@ -61,9 +61,9 @@ function restaurant_reservation_multistep_ctools_wizard($step) {
     'ajax' => TRUE,
     'path' => 'reservation?step=%step',
     'show trail' => FALSE,
-    'show back' => FALSE,
+    'show back' => TRUE,
     'show return' => FALSE,
-    'finish text' => t('All done! We know what you want and have started to work on your delicious customized sweet treat.'),
+    'finish text' => t('All done!'),
     'next callback' => 'restaurant_reservation_multistep_subtask_next',
     'finish callback' => 'restaurant_reservation_multistep_subtask_finish',
     'return callback' => 'restaurant_reservation_multistep_subtask_finish',
@@ -359,7 +359,7 @@ function restaurant_reservation_multistep_step_one_form($form, &$form_state) {
   $options_first = _step_one_first_dropdown_options();
   $selected = isset($form_state['values']['cake_type']) ? $form_state['values']['cake_type'] : key($options_first);
 
-  $form['cake_type'] = array(
+  $form['cake_type']['type'] = array(
     '#type' => 'select',
     '#title' => t('Cake Type'),
     '#required' => TRUE,
@@ -373,7 +373,7 @@ function restaurant_reservation_multistep_step_one_form($form, &$form_state) {
     )
   );
 
-  $form['cake_size'] = array(
+  $form['cake_size']['type'] = array(
     '#type' => 'select',
     '#title' => $options_first[$selected] . ' ' . t('Cake Type'),
     '#prefix' => '<div id="react-to-cake-type-change">',
@@ -382,7 +382,7 @@ function restaurant_reservation_multistep_step_one_form($form, &$form_state) {
     '#default_value' => isset($form_state['values']['cake_size']) ? $form_state['values']['cake_size'] : '',
   );
 
-  $form['cake_flavors'] = array(
+  $form['cake_flavors']['type'] = array(
     '#type' => 'select',
     '#title' => $options_first[$selected] . ' ' . t('Cake Type'),
     '#prefix' => '<div id="react-to-cake-type-change">',
@@ -391,7 +391,7 @@ function restaurant_reservation_multistep_step_one_form($form, &$form_state) {
     '#default_value' => isset($form_state['values']['cake_flavors']) ? $form_state['values']['cake_flavors'] : '',
   );
 
-  $form['cake_fillings'] = array(
+  $form['cake_fillings']['type'] = array(
     '#type' => 'select',
     '#title' => $options_first[$selected] . ' ' . t('Cake Type'),
     '#prefix' => '<div id="react-to-cake-type-change">',
@@ -408,7 +408,7 @@ function restaurant_reservation_multistep_step_one_form($form, &$form_state) {
  */
 function restaurant_reservation_multistep_step_two_form($form, &$form_state) {
   $options_second = _step_two_first_dropdown_options();
-  $form['cake_icing'] = array(
+  $form['cake_icing']['type'] = array(
     '#type' => 'select',
     '#title' => t('Desired Icing'),
     '#required' => TRUE,
@@ -424,7 +424,7 @@ function restaurant_reservation_multistep_step_two_form($form, &$form_state) {
  */
 function restaurant_reservation_multistep_step_three_form($form, &$form_state) {
   $options_third = _step_three_first_dropdown_options();
-  $form['cake_design'] = array(
+  $form['cake_design']['type'] = array(
     '#type' => 'select',
     '#title' => t('Desired Design'),
     '#options' => $options_third,
