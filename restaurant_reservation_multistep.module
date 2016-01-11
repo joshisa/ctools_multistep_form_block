@@ -55,11 +55,87 @@ function _first_dropdown_options() {
   );
 }
 
+function _second_dropdown_options($key = '') {
+  $options = array(
+    t('Sheet') => drupal_map_assoc(
+    array(
+      t('1/4 (16-24 people)'),
+      t('1/2 (32-48 people'),
+      t('Full (64-96 people'),
+    )
+    ),
+    t('Dancer') => drupal_map_assoc(
+    array(
+      t('1/4 (16-24 people)'),
+      t('1/2 (32-48 people'),
+      t('Full (64-96 people'),
+    )
+    ),
+    t('Round') => drupal_map_assoc(
+    array(
+      t('Single Layer (6-10 people'),
+      t('Double Layer (8-12 people'),
+    )
+    ),
+    t('Pull-Apart Cupcake') => drupal_map_assoc(
+    array(
+      t('Six (6)'),
+      t('Twelve (12)'),
+      t('Twenty-Four (24)'),
+    )
+    ),
+    t('Brownie Sandwich') => drupal_map_assoc(
+    array(
+      t('Six (6)'),
+      t('Twelve (12)'),
+      t('Twenty-Four (24)'),
+    )
+    ),
+  );
+  if (isset($options[$key])) {
+    return $options[$key];
+  }
+  else {
+    return array();
+  }
+}
+
 function cake_designer_form($form, &$form_state) {
-  $form['myfield'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Some Field'),
+  $options_first = _first_dropdown_options();
+  $selected = isset($form_state['values']['cake_type']) ? $form_state['values']['cake_type'] : key($options_first);
+  $form['model_wrapper'] = array(
+    '#prefix' => '<div id="react-to-cake-type-change">',
+    '#suffix' => '</div>',
   );
 
+  $form['cake_type'] = array(
+    '#type' => 'select',
+    '#title' => t('Cake Type'),
+    '#required' => TRUE,
+    '#options' => $options_first,
+    '#default_value' => $selected,
+    // Bind an ajax callback to the change event.
+    // Reference: https://api.drupal.org/api/examples/ajax_example!ajax_example.module/function/ajax_example_dependent_dropdown/7
+    '#ajax' => array(
+      'event' => 'change',
+      'callback' => 'restaurant_reservation_multistep_callback',
+      'wrapper' => 'model-wrapper',
+      'method' => 'replace',
+    )
+  );
+
+  $form['model_wrapper']['cake_size'] = array(
+    '#type' => 'select',
+    '#title' => $options_first[$selected] . ' ' . t('Cake Type'),
+    '#prefix' => '<div id="react-to-cake-type-change">',
+    '#suffix' => '</div>',
+    '#options' => _second_dropdown_options($selected),
+    '#default_value' => isset($form_state['values']['cake_size']) ? $form_state['values']['cake_size'] : '',
+  );
+
+  return $form;
+}
+
+function restaurant_reservation_multistep_callback($form, &$form_state) {
   return $form;
 }
