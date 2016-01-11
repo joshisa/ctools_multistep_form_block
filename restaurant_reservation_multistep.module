@@ -22,11 +22,18 @@ function restaurant_reservation_multistep_block_info() {
  * Implements hook_block_view.
  */
 function restaurant_reservation_multistep_block_block_view($delta = '') {
-  global $user;
-  $account = $user;
-  $block['content'] = t('Hello @user from IP @host',array(
-    '@user' => format_username($user), 
-    '@host' => $account->hostname
-  ));
+  $block = array();
+
+  switch ($delta) {
+  case 'restaurant_reservation_multistep':
+      $block['subject'] = '';
+      $block['content'] = _restaurant_reservation_multistep_block_block_content();
+      break;
+  }
   return $block;
+}
+
+function _restaurant_reservation_multistep_block_block_content() {
+  $output = t('Hello World!');
+  return $output;
 }
