@@ -48,6 +48,7 @@ function _first_dropdown_options() {
   // drupal_map_assoc() just makes an array('String' => 'String'...).
   return drupal_map_assoc(
   array(
+    t('-- Select Cake Type --'),
     t('Sheet'),
     t('Round'),
     t('Pull-Apart Cupcake'),
@@ -98,7 +99,7 @@ function _second_dropdown_options($key = '') {
     return $options[$key];
   }
   else {
-    return array();
+    return array(t('-- Select Cake Size --'));
   }
 }
 
@@ -248,7 +249,7 @@ function cake_designer_form($form, $form_state) {
     '#title' => t('Cake Type'),
     '#required' => TRUE,
     '#options' => $options_first,
-    '#default_value' => '-- Select Cake Type --',
+    '#default_value' => t('-- Select Cake Type --'),
     // Bind an ajax callback to the change event (which is the default for the
     // select form type) of the first dropdown. It will replace the second
     // dropdown when rebuilt.
@@ -273,7 +274,7 @@ function cake_designer_form($form, $form_state) {
     // When the form is rebuilt during ajax processing, the $selected variable
     // will now have the new value and so the options will change.
     '#options' => isset($form_state['values']['cake_type']) ? _second_dropdown_options($selected) : '',
-    '#default_value' => '',
+    '#default_value' => isset($form_state['values']['cake_type']) ? $form_state['values']['cake_size'] : '',
     '#ajax' => array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
@@ -295,7 +296,7 @@ function cake_designer_form($form, $form_state) {
     // When the form is rebuilt during ajax processing, the $selected variable
     // will now have the new value and so the options will change.
     '#options' => _third_dropdown_options($selected),
-    '#default_value' => isset($form_state['values']['cake_flavors']) ? $form_state['values']['cake_flavors'] : '',
+    '#default_value' => isset($form_state['values']['cake_type']) ? $form_state['values']['cake_flavors'] : '',
   );
 
   $form['cake_fillings'] = array(
