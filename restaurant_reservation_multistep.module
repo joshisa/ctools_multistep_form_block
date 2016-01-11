@@ -38,6 +38,7 @@ function restaurant_reservation_multistep_block_view($delta = '') {
 
 function _restaurant_reservation_multistep_block_content() {
   // $output = t('Hello World!');
+  $output = '';
   $cakeform = drupal_get_form('cake_designer_form');
   $output .= drupal_render($cakeform);
   return ($output);
@@ -247,7 +248,7 @@ function cake_designer_form($form, $form_state) {
     '#title' => t('Cake Type'),
     '#required' => TRUE,
     '#options' => $options_first,
-    '#default_value' => $selected,
+    '#default_value' => '-- Select Cake Type --',
     // Bind an ajax callback to the change event (which is the default for the
     // select form type) of the first dropdown. It will replace the second
     // dropdown when rebuilt.
@@ -258,7 +259,7 @@ function cake_designer_form($form, $form_state) {
       // most notably 'mousedown', 'blur', and 'submit'.
       // 'event' => 'change',
       'callback' => 'restaurant_reservation_multistep_cake_type_callback',
-      'wrapper' => 'cake-type-change',
+      'wrapper' => 'cake-size-replace',
     ),
   );
 
@@ -267,12 +268,12 @@ function cake_designer_form($form, $form_state) {
     '#title' => t('Available') . ' ' . $options_first[$selected] . ' ' . t('Cake') . ' ' . t('Sizes'),
     // The entire enclosing div created here gets replaced when cake_type
     // is changed.
-    '#prefix' => '<div id="cake-type-change">',
+    '#prefix' => '<div id="cake-size-replace">',
     '#suffix' => '</div>',
     // When the form is rebuilt during ajax processing, the $selected variable
     // will now have the new value and so the options will change.
-    '#options' => _second_dropdown_options($selected),
-    '#default_value' => isset($form_state['values']['cake_size']) ? $form_state['values']['cake_size'] : '',
+    '#options' => isset($form_state['values']['cake_type']) ? _second_dropdown_options($selected) : '',
+    '#default_value' => '',
     '#ajax' => array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
@@ -280,7 +281,7 @@ function cake_designer_form($form, $form_state) {
       // most notably 'mousedown', 'blur', and 'submit'.
       // 'event' => 'change',
       'callback' => 'restaurant_reservation_multistep_cake_size_callback',
-      'wrapper' => 'cake-size-change',
+      'wrapper' => 'cake-flavors-replace',
     ),
   );
 
@@ -289,7 +290,7 @@ function cake_designer_form($form, $form_state) {
     '#title' => t('Available') . ' ' . $options_first[$selected] . ' ' . t('Cake') . ' ' . t('Flavors'),
     // The entire enclosing div created here gets replaced when cake_type
     // is changed.
-    '#prefix' => '<div id="cake-size-change">',
+    '#prefix' => '<div id="cake-type-change">',
     '#suffix' => '</div>',
     // When the form is rebuilt during ajax processing, the $selected variable
     // will now have the new value and so the options will change.
@@ -344,5 +345,6 @@ function restaurant_reservation_multistep_cake_type_callback($form, $form_state)
 }
 
 function restaurant_reservation_multistep_cake_size_callback($form, $form_state) {
-  return $form['cake_flavors'];
+  $commands[] = ajax_command_insert('#cake-flavors-replace', drupal_render($form['cake_flavors']));
+  return array('#type' => 'ajax', '#commands' => $commands);
 }
