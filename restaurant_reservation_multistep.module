@@ -267,6 +267,7 @@ function cake_designer_form($form, $form_state) {
     '#type' => 'select',
     '#title' => t('Cake') . ' ' . t('Size'),
     '#required' => TRUE,
+    '#validated' => TRUE,
     // The entire enclosing div created here gets replaced when cake_type
     // is changed.
     '#prefix' => '<div id="cake-size-replace">',
@@ -290,6 +291,7 @@ function cake_designer_form($form, $form_state) {
     '#type' => 'select',
     '#title' => t('Cake') . ' ' . t('Flavor'),
     '#required' => TRUE,
+    '#validated' => TRUE,
     // The entire enclosing div created here gets replaced when cake_type
     // is changed.
     '#prefix' => '<div id="cake-flavors-replace">',
@@ -313,6 +315,7 @@ function cake_designer_form($form, $form_state) {
     '#type' => 'select',
     '#title' => t('Cake') . ' ' . t('Filling'),
     '#required' => TRUE,
+    '#validated' => TRUE,
     // The entire enclosing div created here gets replaced when cake_type
     // is changed.
     '#prefix' => '<div id="cake-fillings-replace">',
@@ -336,6 +339,7 @@ function cake_designer_form($form, $form_state) {
     '#type' => 'select',
     '#title' => t('Cake') . ' ' . t('Icing'),
     '#required' => TRUE,
+    '#validated' => TRUE,
     // The entire enclosing div created here gets replaced when cake_type
     // is changed.
     '#prefix' => '<div id="cake-icings-replace">',
@@ -358,6 +362,7 @@ function cake_designer_form($form, $form_state) {
     '#type' => 'select',
     '#title' => t('Cake') . ' ' . t('Design'),
     '#required' => TRUE,
+    '#validated' => TRUE,
     // The entire enclosing div created here gets replaced when cake_type
     // is changed.
     '#prefix' => '<div id="cake-designs-replace">',
@@ -376,9 +381,6 @@ function restaurant_reservation_multistep_cake_type_callback($form, $form_state)
 
 function restaurant_reservation_multistep_cake_size_callback($form, $form_state) {
   $commands[] = ajax_command_insert('#cake-flavors-replace', drupal_render($form['cake_flavors']));
-  $commands[] = ajax_command_insert('#cake-fillings-replace', drupal_render($form['cake_fillings']));
-  $commands[] = ajax_command_insert('#cake-icings-replace', drupal_render($form['cake_icings']));
-  $commands[] = ajax_command_insert('#cake-designs-replace', drupal_render($form['cake_designs']));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
