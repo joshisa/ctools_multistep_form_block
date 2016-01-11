@@ -1,5 +1,5 @@
-name = Savas Example
-description = Provides an example CTools multi-step form in a block
-package = Examples
+name = Open Restaurant Reservation
+description = Provides a multi-step form in a block for an Open Restaurant Reservation
+package = bluemix
 core = 7.x
 dependencies[] = ctools
