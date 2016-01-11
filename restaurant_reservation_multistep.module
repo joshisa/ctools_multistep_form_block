@@ -321,7 +321,7 @@ function cake_designer_form($form, $form_state) {
     '#suffix' => '</div>',
     // When the form is rebuilt during ajax processing, the $selected variable
     // will now have the new value and so the options will change.
-    '#options' => _fourth_dropdown_options($selected),
+    '#options' => _third_dropdown_options($selected),
     '#default_value' => 0,
     '#ajax' => array(
       // When 'event' occurs, Drupal will perform an ajax request in the
@@ -334,6 +334,7 @@ function cake_designer_form($form, $form_state) {
     ),
   );
 
+  /*
   $form['cake_icings'] = array(
     '#type' => 'select',
     '#title' => t('Cake') . ' ' . t('Icing'),
@@ -368,6 +369,7 @@ function cake_designer_form($form, $form_state) {
     // will now have the new value and so the options will change.
     '#options' => _sixth_dropdown_options($selected),
   );
+   */
 
   return $form;
 }
