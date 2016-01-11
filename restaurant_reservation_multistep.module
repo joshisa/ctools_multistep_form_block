@@ -38,8 +38,9 @@ function restaurant_reservation_multistep_block_view($delta = '') {
 
 function _restaurant_reservation_multistep_block_content() {
   // $output = t('Hello World!');
-  $output = drupal_render(drupal_get_form('cake_designer_form'));
-  return $output;
+  $cakeform = drupal_get_form('cake_designer_form');
+  $output .= drupal_render($cakeform);
+  return ($output);
 }
 
 function _first_dropdown_options() {
@@ -213,7 +214,7 @@ function _fifth_dropdown_options() {
   // drupal_map_assoc() just makes an array('String' => 'String'...).
   return drupal_map_assoc(
   array(
-    t('White Icing (Ask about other colors'),
+    t('White Icing (Ask about other colors)'),
     t('Chocolate Icing'),
     t('Whipped Topping'),
     t('Cream Cheese Icing'),
@@ -256,8 +257,8 @@ function cake_designer_form($form, $form_state) {
       // select elements), but valid values include any jQuery event,
       // most notably 'mousedown', 'blur', and 'submit'.
       // 'event' => 'change',
-      'callback' => 'restaurant_reservation_multistep_callback',
-      'wrapper' => 'react-to-cake-type-change',
+      'callback' => 'restaurant_reservation_multistep_cake_type_callback',
+      'wrapper' => 'cake-type-change',
     ),
   );
 
@@ -266,12 +267,21 @@ function cake_designer_form($form, $form_state) {
     '#title' => t('Available') . ' ' . $options_first[$selected] . ' ' . t('Cake') . ' ' . t('Sizes'),
     // The entire enclosing div created here gets replaced when cake_type
     // is changed.
-    '#prefix' => '<div id="react-to-cake-type-change">',
+    '#prefix' => '<div id="cake-type-change">',
     '#suffix' => '</div>',
     // When the form is rebuilt during ajax processing, the $selected variable
     // will now have the new value and so the options will change.
     '#options' => _second_dropdown_options($selected),
     '#default_value' => isset($form_state['values']['cake_size']) ? $form_state['values']['cake_size'] : '',
+    '#ajax' => array(
+      // When 'event' occurs, Drupal will perform an ajax request in the
+      // background. Usually the default value is sufficient (eg. change for
+      // select elements), but valid values include any jQuery event,
+      // most notably 'mousedown', 'blur', and 'submit'.
+      // 'event' => 'change',
+      'callback' => 'restaurant_reservation_multistep_cake_size_callback',
+      'wrapper' => 'cake-size-change',
+    ),
   );
 
   $form['cake_flavors'] = array(
@@ -279,7 +289,7 @@ function cake_designer_form($form, $form_state) {
     '#title' => t('Available') . ' ' . $options_first[$selected] . ' ' . t('Cake') . ' ' . t('Flavors'),
     // The entire enclosing div created here gets replaced when cake_type
     // is changed.
-    '#prefix' => '<div id="react-to-cake-type-change">',
+    '#prefix' => '<div id="cake-size-change">',
     '#suffix' => '</div>',
     // When the form is rebuilt during ajax processing, the $selected variable
     // will now have the new value and so the options will change.
@@ -329,6 +339,10 @@ function cake_designer_form($form, $form_state) {
   return $form;
 }
 
-function restaurant_reservation_multistep_callback($form, $form_state) {
+function restaurant_reservation_multistep_cake_type_callback($form, $form_state) {
   return $form['cake_size'];
+}
+
+function restaurant_reservation_multistep_cake_size_callback($form, $form_state) {
+  return $form['cake_flavors'];
 }
