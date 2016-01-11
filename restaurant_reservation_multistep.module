@@ -31,12 +31,35 @@ function restaurant_reservation_multistep_block_view($delta = '') {
         break;
     default:
         $block['subject'] = '';
-        $block['content'] = t('Default');
+        $block['content'] = t('Uh oh! Bullseye\'s designer has gone on vacation!');
   }
   return $block;
 }
 
 function _restaurant_reservation_multistep_block_content() {
-  $output = t('Hello World!');
+  // $output = t('Hello World!');
+  $output = drupal_render(drupal_get_form('cake_designer_form'));
   return $output;
+}
+
+function _first_dropdown_options() {
+  // drupal_map_assoc() just makes an array('String' => 'String'...).
+  return drupal_map_assoc(
+  array(
+    t('Sheet'),
+    t('Round'),
+    t('Pull-Apart Cupcake'),
+    t('Dancer'),
+    t('Brownie Sandwich'),
+  )
+  );
+}
+
+function cake_designer_form($form, &$form_state) {
+  $form['myfield'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Some Field'),
+  );
+
+  return $form;
 }
