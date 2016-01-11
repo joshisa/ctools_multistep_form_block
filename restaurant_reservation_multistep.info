@@ -1,5 +1,5 @@
-name = Open Restaurant Reservation
+name = Restaurant Reservation MultiStep
 description = Provides a multi-step form in a block for an Open Restaurant Reservation
-package = bluemix
+package = Open Restaurant Apps
 core = 7.x
 dependencies[] = ctools
