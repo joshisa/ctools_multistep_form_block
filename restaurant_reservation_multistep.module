@@ -299,7 +299,7 @@ function cake_designer_form($form, $form_state) {
     // When the form is rebuilt during ajax processing, the $selected variable
     // will now have the new value and so the options will change.
     '#options' => _third_dropdown_options($selected),
-    '#default' => 0,
+    '#default' => t('- Select a value -'),
     '#ajax' => array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
@@ -322,7 +322,7 @@ function cake_designer_form($form, $form_state) {
     // When the form is rebuilt during ajax processing, the $selected variable
     // will now have the new value and so the options will change.
     '#options' => _fourth_dropdown_options($selected),
-    '#default_value' => 0,
+    '#default_value' => t('- Select a value -'),
     '#ajax' => array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
@@ -345,7 +345,6 @@ function cake_designer_form($form, $form_state) {
     // When the form is rebuilt during ajax processing, the $selected variable
     // will now have the new value and so the options will change.
     '#options' => _fifth_dropdown_options($selected),
-    '#default_value' => 0,
     '#ajax' => array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
