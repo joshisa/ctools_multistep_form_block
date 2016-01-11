@@ -103,11 +103,6 @@ function _second_dropdown_options($key = '') {
 function cake_designer_form($form, $form_state) {
   $options_first = _first_dropdown_options();
   $selected = isset($form_state['values']['cake_type']) ? $form_state['values']['cake_type'] : key($options_first);
-  /*
-  $form['model_wrapper'] = array(
-    '#prefix' => '<div id="react-to-cake-type-change">',
-    '#suffix' => '</div>',
-  );
 
   $form['cake_type'] = array(
     '#type' => 'select',
@@ -120,12 +115,11 @@ function cake_designer_form($form, $form_state) {
     '#ajax' => array(
       'event' => 'change',
       'callback' => 'restaurant_reservation_multistep_callback',
-      'wrapper' => 'model-wrapper',
-      'method' => 'replace',
+      'wrapper' => 'react-to-cake-type-change',
     )
   );
 
-  $form['model_wrapper']['cake_size'] = array(
+  $form['cake_size'] = array(
     '#type' => 'select',
     '#title' => $options_first[$selected] . ' ' . t('Cake Type'),
     '#prefix' => '<div id="react-to-cake-type-change">',
@@ -133,14 +127,13 @@ function cake_designer_form($form, $form_state) {
     '#options' => _second_dropdown_options($selected),
     '#default_value' => isset($form_state['values']['cake_size']) ? $form_state['values']['cake_size'] : '',
   );
-   */
 
   // If we have a value for the first dropdown from $form_state['values'] we use
   // this both as the default value for the first dropdown and also as a
   // parameter to pass to the function that retrieves the options for the
   // second dropdown.
-  $selected = isset($form_state['values']['dropdown_first']) ? $form_state['values']['dropdown_first'] : key($options_first);
-
+  //SPJ $selected = isset($form_state['values']['dropdown_first']) ? $form_state['values']['dropdown_first'] : key($options_first);
+  /*
   $form['dropdown_first'] = array(
     '#type' => 'select',
     '#title' => 'Instrument Type',
@@ -172,7 +165,7 @@ function cake_designer_form($form, $form_state) {
     '#options' => _second_dropdown_options($selected),
     '#default_value' => isset($form_state['values']['dropdown_second']) ? $form_state['values']['dropdown_second'] : '',
   );
-
+  */
   return $form;
 }
 
