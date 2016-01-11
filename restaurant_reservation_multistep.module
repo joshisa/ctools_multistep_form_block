@@ -358,6 +358,11 @@ function _step_three_first_dropdown_options() {
 function restaurant_reservation_multistep_step_one_form($form, &$form_state) {
   $options_first = _step_one_first_dropdown_options();
   $selected = isset($form_state['values']['cake_type']) ? $form_state['values']['cake_type'] : key($options_first);
+  $form['model_wrapper_container'] = array(
+    '#type' => 'container',
+    '#prefix' => '<div id="react-to-cake-type-change">',
+    '#suffix' => '</div>',
+  );
 
   $form['cake_type']['type'] = array(
     '#type' => 'select',
