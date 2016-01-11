@@ -11,10 +11,10 @@
 /**
  * Implements hook_block_info().
  */
-function savas_example_block_info() {
+function restaurant_reservation_multistep_block_info() {
   $blocks = array();
-  $blocks['savas_example'] = array(
-    'info' => t('Example form'),
+  $blocks['restaurant_reservation_multistep'] = array(
+    'info' => t('MultiStep Form'),
     'cache' => DRUPAL_NO_CACHE,
   );
   return $blocks;
@@ -23,14 +23,14 @@ function savas_example_block_info() {
 /**
  * Implements hook_block_view().
  */
-function savas_example_block_view($delta = '') {
+function restaurant_reservation_multistep_block_view($delta = '') {
   $block = array();
   switch ($delta) {
-    case 'savas_example':
-      $block['subject'] = t('Example form block');
+    case 'restaurant_reservation_multistep':
+      $block['subject'] = t('MultiStep Form Block');
       $parameters = drupal_get_query_parameters();
       $next_step = empty($parameters['step']) ? 'step-one' : $parameters['step'];
-      $block['content'] = savas_example_ctools_wizard($next_step);
+      $block['content'] = restaurant_reservation_multistep_ctools_wizard($next_step);
       break;
   }
   return $block;
@@ -39,9 +39,9 @@ function savas_example_block_view($delta = '') {
 /**
  * Implements hook_init().
  */
-function savas_example_init() {
+function restaurant_reservation_multistep_init() {
   // If the path leads to the wizard.
-  if (drupal_match_path($_GET['q'], '/node*')) {
+  if (drupal_match_path($_GET['q'], '/reservation*')) {
     // Set cache to false.
     $GLOBALS['conf']['cache'] = FALSE;
   }
@@ -53,31 +53,43 @@ function savas_example_init() {
  * @param string $step
  *   The step to display.
  */
-function savas_example_ctools_wizard($step) {
+function restaurant_reservation_multistep_ctools_wizard($step) {
   ctools_include('wizard');
   ctools_include('object-cache');
   $form_info = array(
-    'id' => 'example-form',
+    'id' => 'multistep-form',
     'ajax' => TRUE,
-    'path' => 'node?step=%step',
+    'path' => 'reservation?step=%step',
     'show trail' => TRUE,
     'show back' => FALSE,
     'show return' => FALSE,
-    'finish text' => t('All done!'),
-    'next callback' => 'savas_example_subtask_next',
-    'finish callback' => 'savas_example_subtask_finish',
-    'return callback' => 'savas_example_subtask_finish',
-    'cancel callback' => 'savas_example_subtask_cancel',
+    'finish text' => t('All done! We know what you want and have started to work on your delicious customized sweet treat.'),
+    'next callback' => 'restaurant_reservation_multistep_subtask_next',
+    'finish callback' => 'restaurant_reservation_multistep_subtask_finish',
+    'return callback' => 'restaurant_reservation_multistep_subtask_finish',
+    'cancel callback' => 'restaurant_reservation_multistep_subtask_cancel',
     'order' => array(
-      'step-one' => t('Step one'),
-      'step-two' => t('Step two'),
+      'step-one' => t('Select your type of cake'),
+      'step-two' => t('Select your flavor'),
+      'step-three' => t('Select your filling'),
+      'step-four' => t('Select your icing'),
+      'step-five' => t('Select your design'),
     ),
     'forms' => array(
       'step-one' => array(
-        'form id' => 'savas_example_step_one_form',
+        'form id' => 'restaurant_reservation_multistep_step_one_form',
       ),
       'step-two' => array(
-        'form id' => 'savas_example_step_two_form',
+        'form id' => 'restaurant_reservation_multistep_step_two_form',
+      ),
+      'step-three' => array(
+        'form id' => 'restaurant_reservation_multistep_step_three_form',
+      ),
+      'step-four' => array(
+        'form id' => 'restaurant_reservation_multistep_step_four_form',
+      ),
+      'step-five' => array(
+        'form id' => 'restaurant_reservation_multistep_step_five_form',
       ),
     ),
   );
@@ -85,7 +97,7 @@ function savas_example_ctools_wizard($step) {
   if (!$step) {
     $step = 'step-one';
   }
-  $form_state['savas_example_object'] = savas_example_get_page_cache('savas_example');
+  $form_state['restaurant_reservation_multistep_object'] = restaurant_reservation_multistep_get_page_cache('restaurant_reservation_multistep');
   $output = ctools_wizard_multistep_form($form_info, $step, $form_state);
   return $output;
 }
@@ -96,12 +108,12 @@ function savas_example_ctools_wizard($step) {
  * @param string $name
  *   The name of the cached object to retrieve.
  */
-function savas_example_get_page_cache($name) {
+function restaurant_reservation_multistep_get_page_cache($name) {
   ctools_include('object-cache');
-  $cache = ctools_object_cache_get('savas_example', $name);
+  $cache = ctools_object_cache_get('restaurant_reservation_multistep', $name);
   if (!$cache) {
     $cache = new stdClass();
-    $cache->locked = ctools_object_cache_test('savas_example', $name);
+    $cache->locked = ctools_object_cache_test('restaurant_reservation_multistep', $name);
   }
   return $cache;
 }
@@ -114,9 +126,9 @@ function savas_example_get_page_cache($name) {
  * @param object $data
  *   The object to be cached.
  */
-function savas_example_set_page_cache($name, $data) {
+function restaurant_reservation_multistep_set_page_cache($name, $data) {
   ctools_include('object-cache');
-  ctools_object_cache_set('savas_example', $name, $data);
+  ctools_object_cache_set('restaurant_reservation_multistep', $name, $data);
 }
 
 /**
@@ -125,49 +137,276 @@ function savas_example_set_page_cache($name, $data) {
  * @param string $name
  *   The name of the object to destroy.
  */
-function savas_example_clear_page_cache($name) {
+function restaurant_reservation_multistep_clear_page_cache($name) {
   ctools_include('object-cache');
-  ctools_object_cache_clear('savas_example', $name);
+  ctools_object_cache_clear('restaurant_reservation_multistep', $name);
 }
 
 /**
  * Callback executed when the 'next' button is clicked.
  */
-function savas_example_subtask_next(&$form_state) {
-  $values = (array) savas_example_get_page_cache('savas_example');
-  savas_example_set_page_cache('savas_example', array_merge($values, $form_state['values']));
+function restaurant_reservation_multistep_subtask_next(&$form_state) {
+  $values = (array) restaurant_reservation_multistep_get_page_cache('restaurant_reservation_multistep');
+  restaurant_reservation_multistep_set_page_cache('restaurant_reservation_multistep', array_merge($values, $form_state['values']));
   $parsed = parse_url($form_state['redirect'][0]);
   // Because we are using query parameters to advance/rewind the form, and
   // Ctools doesn't like query parameters (URL encoding fails), we'll use
   // drupal_goto() to take the user where they need to go.
-  $destination = substr($form_state['redirect'][0], strlen('node?step='));
+  $destination = substr($form_state['redirect'][0], strlen('reservation?step='));
   drupal_goto($parsed['path'], array('query' => array('step' => $destination)));
 }
 
 /**
  * Callback executed when the 'cancel' button is clicked.
  */
-function savas_example_subtask_cancel() {
-  savas_example_clear_page_cache('savas_example');
+function restaurant_reservation_multistep_subtask_cancel() {
+  restaurant_reservation_multistep_clear_page_cache('restaurant_reservation_multistep');
 }
 
 /**
  * Callback executed when the entire form submission is finished.
  */
-function savas_example_subtask_finish() {
-  savas_example_clear_page_cache('savas_example');
-  drupal_set_message(t('Thanks!'));
+function restaurant_reservation_multistep_subtask_finish() {
+  restaurant_reservation_multistep_clear_page_cache('restaurant_reservation_multistep');
+  drupal_set_message(t('Tip: Free smash cake for first birthdays with purchase of a special order cake'));
   drupal_goto('<front>');
+}
+
+function _step_one_first_dropdown_options() {
+  // drupal_map_assoc() just makes an array('String' => 'String'...).
+  return drupal_map_assoc(
+  array(
+    t('Sheet'),
+    t('Round'),
+    t('Pull-Apart Cupcake'),
+    t('Dancer'),
+    t('Brownie Sandwich'),
+  )
+  );
+}
+
+function _step_one_second_dropdown_options($key = '') {
+  $options = array(
+    t('Sheet') => drupal_map_assoc(
+    array(
+      t('1/4 (16-24 people)'),
+      t('1/2 (32-48 people'),
+      t('Full (64-96 people'),
+    )
+    ),
+    t('Dancer') => drupal_map_assoc(
+    array(
+      t('1/4 (16-24 people)'),
+      t('1/2 (32-48 people'),
+      t('Full (64-96 people'),
+    )
+    ),
+    t('Round') => drupal_map_assoc(
+    array(
+      t('Single Layer (6-10 people'),
+      t('Double Layer (8-12 people'),
+    )
+    ),
+    t('Pull-Apart Cupcake') => drupal_map_assoc(
+    array(
+      t('Six (6)'),
+      t('Twelve (12)'),
+      t('Twenty-Four (24)'),
+    )
+    ),
+    t('Brownie Sandwich') => drupal_map_assoc(
+    array(
+      t('Six (6)'),
+      t('Twelve (12)'),
+      t('Twenty-Four (24)'),
+    )
+    ),
+  );
+  if (isset($options[$key])) {
+    return $options[$key];
+  }
+  else {
+    return array();
+  }
+}
+
+function _step_one_third_dropdown_options($key = '') {
+  $options = array(
+    t('Sheet') => drupal_map_assoc(
+    array(
+      t('White'),
+      t('Chocolate'),
+      t('Marble'),
+      t('Yellow'),
+      t('Red Velvet')
+    )
+    ),
+    t('Dancer') => drupal_map_assoc(
+    array(
+      t('White'),
+      t('Chocolate'),
+      t('Marble'),
+      t('Yellow'),
+      t('Red Velvet')
+    )
+    ),
+    t('Round') => drupal_map_assoc(
+    array(
+      t('White'),
+      t('Chocolate'),
+      t('Marble'),
+      t('Red Velvet')
+    )
+    ),
+    t('Pull-Apart Cupcake') => drupal_map_assoc(
+    array(
+      t('White'),
+      t('Chocolate'),
+      t('Variety'),
+    )
+    ),
+    t('Brownie Sandwich') => drupal_map_assoc(
+    array(
+      t('White'),
+      t('Chocolate'),
+      t('Variety'),
+    )
+    ),
+  );
+  if (isset($options[$key])) {
+    return $options[$key];
+  }
+  else {
+    return array();
+  }
+}
+
+function _step_one_fourth_dropdown_options($key = '') {
+  $options = array(
+    t('Sheet') => drupal_map_assoc(
+    array(
+      t('Bavarian Cream'),
+      t('Raspberry'),
+      t('Lemon'),
+      t('Cherry'),
+      t('Chocolate'),
+      t('Cream Cheese'),
+      t('Strawberry'),
+      t('White'),
+    )
+    ),
+    t('Dancer') => drupal_map_assoc(
+    array(
+      t('Bavarian Cream'),
+      t('Raspberry'),
+      t('Lemon'),
+      t('Chocolate'),
+      t('White'),
+    )
+    ),
+    t('Round') => drupal_map_assoc(
+    array(
+      t('Bavarian Cream'),
+      t('Raspberry'),
+      t('Lemon'),
+      t('Cherry'),
+      t('Chocolate'),
+      t('Cream Cheese'),
+      t('Strawberry'),
+      t('White'),
+    )
+    ),
+    t('Pull-Apart Cupcake') => drupal_map_assoc(
+    array(
+      t('N/A'),
+    )
+    ),
+    t('Brownie Sandwich') => drupal_map_assoc(
+    array(
+      t('Vanilla Ice Cream'),
+      t('Vanilla Yogurt'),
+      t('Chocolate Vanilla Swirl'),
+      t('Strawberry Ice Cream'),
+      t('French Vanilla Ice Cream'),
+    )
+    ),
+  );
+  if (isset($options[$key])) {
+    return $options[$key];
+  }
+  else {
+    return array();
+  }
+}
+
+function _step_two_first_dropdown_options() {
+  // drupal_map_assoc() just makes an array('String' => 'String'...).
+  return drupal_map_assoc(
+  array(
+    t('White Icing (Ask about other colors'),
+    t('Chocolate Icing'),
+    t('Whipped Topping'),
+    t('Cream Cheese Icing'),
+  )
+  );
+}
+
+function _step_three_first_dropdown_options() {
+  // drupal_map_assoc() just makes an array('String' => 'String'...).
+  return drupal_map_assoc(
+  array(
+    t('Character Design'),
+    t('Theme Design'),
+  )
+  );
 }
 
 /**
  * Form for data entry (step 1).
  */
-function savas_example_step_one_form($form, &$form_state) {
-  $form['hello']['type'] = array(
+function restaurant_reservation_multistep_step_one_form($form, &$form_state) {
+  $options_first = _step_one_first_dropdown_options();
+  $selected = isset($form_state['values']['cake_type']) ? $form_state['values']['cake_type'] : key($options_first);
+
+  $form['cake_type'] = array(
     '#type' => 'select',
-    '#title' => t('Hello'),
-    '#options' => array('World', 'Earth'),
+    '#title' => t('Cake Type'),
+    '#required' => TRUE,
+    '#options' => $options_first,
+    '#default_value' => $selected,
+    // Bind an ajax callback to the change event.
+    // Reference: https://api.drupal.org/api/examples/ajax_example!ajax_example.module/function/ajax_example_dependent_dropdown/7
+    '#ajax' => array(
+      'callback' => 'restaurant_reservation_multistep_step_one_form_callback',
+      'wrapper' => 'react-to-cake-type-change',
+    )
+  );
+
+  $form['cake_size'] = array(
+    '#type' => 'select',
+    '#title' => $options_first[$selected] . ' ' . t('Cake Type'),
+    '#prefix' => '<div id="react-to-cake-type-change">',
+    '#suffix' => '</div>',
+    '#options' => _step_one_second_dropdown_options($selected),
+    '#default_value' => isset($form_state['values']['cake_size']) ? $form_state['values']['cake_size'] : '',
+  );
+
+  $form['cake_flavors'] = array(
+    '#type' => 'select',
+    '#title' => $options_first[$selected] . ' ' . t('Cake Type'),
+    '#prefix' => '<div id="react-to-cake-type-change">',
+    '#suffix' => '</div>',
+    '#options' => _step_one_third_dropdown_options($selected),
+    '#default_value' => isset($form_state['values']['cake_flavors']) ? $form_state['values']['cake_flavors'] : '',
+  );
+
+  $form['cake_fillings'] = array(
+    '#type' => 'select',
+    '#title' => $options_first[$selected] . ' ' . t('Cake Type'),
+    '#prefix' => '<div id="react-to-cake-type-change">',
+    '#suffix' => '</div>',
+    '#options' => _step_one_fourth_dropdown_options($selected),
+    '#default_value' => isset($form_state['values']['cake_fillings']) ? $form_state['values']['cake_fillings'] : '',
   );
 
   return $form;
@@ -176,11 +415,29 @@ function savas_example_step_one_form($form, &$form_state) {
 /**
  * Form for data entry (step 2).
  */
-function savas_example_step_two_form($form, &$form_state) {
-  $form['goodbye']['type'] = array(
+function restaurant_reservation_multistep_step_two_form($form, &$form_state) {
+  $options_second = _step_two_first_dropdown_options();
+  $form['cake_icing'] = array(
     '#type' => 'select',
-    '#title' => t('So long!'),
-    '#options' => array('Thanks', 'For reading')
+    '#title' => t('Desired Icing'),
+    '#required' => TRUE,
+    '#options' => $options_second,
+    '#default_value' => isset($form_state['values']['cake_icing']) ? $form_state['values']['cake_icing'] : '',
+  );
+
+  return $form;
+}
+
+/**
+ * Form for data entry (step 3).
+ */
+function restaurant_reservation_multistep_step_three_form($form, &$form_state) {
+  $options_third = _step_three_first_dropdown_options();
+  $form['cake_design'] = array(
+    '#type' => 'select',
+    '#title' => t('Desired Design'),
+    '#options' => $options_third,
+    '#default_value' => isset($form_state['values']['cake_design']) ? $form_state['values']['cake_design'] : '',
   );
 
   return $form;
