@@ -25,10 +25,13 @@ function restaurant_reservation_multistep_block_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {
-  case 'restaurant_reservation_multistep':
-      $block['subject'] = '';
-      $block['content'] = _restaurant_reservation_multistep_block_block_content();
-      break;
+    case 'restaurant_reservation_multistep':
+        $block['subject'] = '';
+        $block['content'] = _restaurant_reservation_multistep_block_block_content();
+        break;
+    default:
+        $block['subject'] = '';
+        $block['content'] = t('Default');
   }
   return $block;
 }
