@@ -16,15 +16,14 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
   // Check when the right form is passed
   if ($form_id == 'eck__entity__form_add_reservation_reservation') {
     $options_first = _first_dropdown_options();
-    $selected = isset($form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#value']) ? $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#value'] : key($options_first);
-    print_r($selected . ' Booyah');
+    # $selected = isset($form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#value']) ? $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#value'] : key($options_first);
     // Add the check box
     $form['certify'] = array(
       '#type' => 'checkbox',
       '#title' => t('I certify that this is awesome yo'),
     );
 
-    // drupal_set_message('<pre>'. print_r($form, 1) .'</pre>');
+    drupal_set_message('<pre>'. print_r($form_state, 1) .'</pre>');
     $form["field_reservation_cake_type"][$form["field_reservation_cake_type"]['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
@@ -38,7 +37,7 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#description'] = t('Cake Sizing');
     $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#prefix'] = '<div id="cake-size-replace">';
     $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#suffix'] = '</div>';
-    $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#options'] = _second_dropdown_options($selected);
+    $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#options'] = _second_dropdown_options('Sheet');
     $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#default'] = 0;
     $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
