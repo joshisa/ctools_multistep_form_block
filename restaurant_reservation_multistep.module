@@ -10,15 +10,14 @@
 /*
  * Implementation of hook_form_alter()
  */
-function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form_id){
+function restaurant_reservation_multistep_form_eck__entity__form_add_reservation_reservation_alter(&$form, &$form_state, $form_id){
   dsm($form);
   dsm($form_id);
-  // Check when the right form is passed
-  if ($form_id == 'eck__entity__form_add_reservation_reservation') {
-    // Add the check box
-    $form['certify'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('I certify that this is my true name'),
-    );
-  }
+  drupal_set_message('<pre>' . print_r($form, true) . '</pre>');
+  // Add the check box
+  $form['certify'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('I certify that this is really awesome'),
+  );
+  //$form['field_reservation_cake_type']['und'][0]]
 }
