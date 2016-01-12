@@ -275,6 +275,7 @@ function _fourth_dropdown_options($key = '') {
   $options = array(
     t('Sheet') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('Bavarian Cream'),
       t('Raspberry'),
       t('Lemon'),
@@ -287,6 +288,7 @@ function _fourth_dropdown_options($key = '') {
     ),
     t('Dancer') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('Bavarian Cream'),
       t('Raspberry'),
       t('Lemon'),
@@ -296,6 +298,7 @@ function _fourth_dropdown_options($key = '') {
     ),
     t('Round') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('Bavarian Cream'),
       t('Raspberry'),
       t('Lemon'),
@@ -308,11 +311,13 @@ function _fourth_dropdown_options($key = '') {
     ),
     t('Pull-Apart Cupcake') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('N/A'),
     )
     ),
     t('Brownie Sandwich') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('Vanilla Ice Cream'),
       t('Vanilla Yogurt'),
       t('Chocolate Vanilla Swirl'),
@@ -333,6 +338,7 @@ function _fifth_dropdown_options() {
   // drupal_map_assoc() just makes an array('String' => 'String'...).
   return drupal_map_assoc(
   array(
+    t('- Select a value -'),
     t('White Icing (Ask about other colors)'),
     t('Chocolate Icing'),
     t('Whipped Topping'),
@@ -345,6 +351,7 @@ function _sixth_dropdown_options() {
   // drupal_map_assoc() just makes an array('String' => 'String'...).
   return drupal_map_assoc(
   array(
+    t('- Select a value -'),
     t('Character Design'),
     t('Theme Design'),
   )
