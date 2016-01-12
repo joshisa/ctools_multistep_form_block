@@ -35,12 +35,12 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
       'wrapper' => 'cake-size-replace',
     );
 
-    $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#description'] = t('Cake Sizing');
-    $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#prefix'] = '<div id="cake-size-replace">';
-    $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#suffix'] = '</div>';
-    $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#options'] = _second_dropdown_options($selected);
-    $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#default'] = 0;
-    $form['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']]['#ajax'] = array(
+    $form['field_reservation_cake_size'][$form['field_reservation_cake_type']['#language']]['#description'] = t('Cake Sizing');
+    $form['field_reservation_cake_size'][$form['field_reservation_cake_type']['#language']]['#prefix'] = '<div id="cake-size-replace">';
+    $form['field_reservation_cake_size'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
+    $form['field_reservation_cake_size'][$form['field_reservation_cake_type']['#language']]['#options'] = _second_dropdown_options($selected);
+    $form['field_reservation_cake_size'][$form['field_reservation_cake_type']['#language']]['#default'] = 0;
+    $form['field_reservation_cake_size'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
       // select elements), but valid values include any jQuery event,
@@ -50,12 +50,12 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
       'wrapper' => 'cake-flavor-replace',
     );
 
-    $form['field_reservation_cake_flavor'][$form['field_reservation_cake_flavor']['#language']]['#description'] = t('Cake Flavor');
-    $form['field_reservation_cake_flavor'][$form['field_reservation_cake_flavor']['#language']]['#prefix'] = '<div id="cake-flavor-replace">';
-    $form['field_reservation_cake_flavor'][$form['field_reservation_cake_flavor']['#language']]['#suffix'] = '</div>';
-    $form['field_reservation_cake_flavor'][$form['field_reservation_cake_flavor']['#language']]['#options'] = _third_dropdown_options($selected);
-    $form['field_reservation_cake_flavor'][$form['field_reservation_cake_flavor']['#language']]['#default'] = 0;
-    $form['field_reservation_cake_flavor'][$form['field_reservation_cake_flavor']['#language']]['#ajax'] = array(
+    $form['field_reservation_cake_flavor'][$form['field_reservation_cake_type']['#language']]['#description'] = t('Cake Flavor');
+    $form['field_reservation_cake_flavor'][$form['field_reservation_cake_type']['#language']]['#prefix'] = '<div id="cake-flavor-replace">';
+    $form['field_reservation_cake_flavor'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
+    $form['field_reservation_cake_flavor'][$form['field_reservation_cake_type']['#language']]['#options'] = _third_dropdown_options($selected);
+    $form['field_reservation_cake_flavor'][$form['field_reservation_cake_type']['#language']]['#default'] = 0;
+    $form['field_reservation_cake_flavor'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
       // select elements), but valid values include any jQuery event,
@@ -65,12 +65,12 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
       'wrapper' => 'cake-filling-replace',
     );
 
-    $form['field_reservation_cake_filling'][$form['field_reservation_cake_filling']['#language']]['#description'] = t('Cake Filling');
-    $form['field_reservation_cake_filling'][$form['field_reservation_cake_filling']['#language']]['#prefix'] = '<div id="cake-filling-replace">';
-    $form['field_reservation_cake_filling'][$form['field_reservation_cake_filling']['#language']]['#suffix'] = '</div>';
-    $form['field_reservation_cake_filling'][$form['field_reservation_cake_filling']['#language']]['#options'] = _fourth_dropdown_options($selected);
-    $form['field_reservation_cake_filling'][$form['field_reservation_cake_filling']['#language']]['#default'] = 0;
-    $form['field_reservation_cake_filling'][$form['field_reservation_cake_filling']['#language']]['#ajax'] = array(
+    $form['field_reservation_cake_filling'][$form['field_reservation_cake_type']['#language']]['#description'] = t('Cake Filling');
+    $form['field_reservation_cake_filling'][$form['field_reservation_cake_type']['#language']]['#prefix'] = '<div id="cake-filling-replace">';
+    $form['field_reservation_cake_filling'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
+    $form['field_reservation_cake_filling'][$form['field_reservation_cake_type']['#language']]['#options'] = _fourth_dropdown_options($selected);
+    $form['field_reservation_cake_filling'][$form['field_reservation_cake_type']['#language']]['#default'] = 0;
+    $form['field_reservation_cake_filling'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
       // select elements), but valid values include any jQuery event,
@@ -80,12 +80,12 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
       'wrapper' => 'cake-icing-replace',
     );
 
-    $form['field_reservation_cake_icing'][$form['field_reservation_cake_icing']['#language']]['#description'] = t('Cake Icing');
-    $form['field_reservation_cake_icing'][$form['field_reservation_cake_icing']['#language']]['#prefix'] = '<div id="cake-icing-replace">';
-    $form['field_reservation_cake_icing'][$form['field_reservation_cake_icing']['#language']]['#suffix'] = '</div>';
-    $form['field_reservation_cake_icing'][$form['field_reservation_cake_icing']['#language']]['#options'] = _fifth_dropdown_options($selected);
-    $form['field_reservation_cake_icing'][$form['field_reservation_cake_icing']['#language']]['#default'] = 0;
-    $form['field_reservation_cake_icing'][$form['field_reservation_cake_icing']['#language']]['#ajax'] = array(
+    $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#description'] = t('Cake Icing');
+    $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#prefix'] = '<div id="cake-icing-replace">';
+    $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
+    $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#options'] = _fifth_dropdown_options($selected);
+    $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#default'] = 0;
+    $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
       // select elements), but valid values include any jQuery event,
@@ -95,11 +95,11 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
       'wrapper' => 'cake-design-replace',
     );
 
-    $form['field_reservation_cake_design'][$form['field_reservation_cake_design']['#language']]['#description'] = t('Cake Design');
-    $form['field_reservation_cake_design'][$form['field_reservation_cake_design']['#language']]['#prefix'] = '<div id="cake-design-replace">';
-    $form['field_reservation_cake_design'][$form['field_reservation_cake_design']['#language']]['#suffix'] = '</div>';
-    $form['field_reservation_cake_design'][$form['field_reservation_cake_design']['#language']]['#options'] = _sixth_dropdown_options($selected);
-    $form['field_reservation_cake_design'][$form['field_reservation_cake_design']['#language']]['#default'] = 0;
+    $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#description'] = t('Cake Design');
+    $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#prefix'] = '<div id="cake-design-replace">';
+    $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
+    $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#options'] = _sixth_dropdown_options($selected);
+    $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#default'] = 0;
     /*
     $form['field_reservation_cake_design'][$form['field_reservation_cake_design']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
