@@ -159,6 +159,7 @@ function _second_dropdown_options($key = '') {
   $options = array(
     t('Sheet') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('1/4 (16-24 people)'),
       t('1/2 (32-48 people)'),
       t('Full (64-96 people)'),
@@ -166,6 +167,7 @@ function _second_dropdown_options($key = '') {
     ),
     t('Dancer') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('1/4 (16-24 people)'),
       t('1/2 (32-48 people)'),
       t('Full (64-96 people)'),
@@ -173,12 +175,14 @@ function _second_dropdown_options($key = '') {
     ),
     t('Round') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('Single Layer (6-10 people)'),
       t('Double Layer (8-12 people)'),
     )
     ),
     t('Pull-Apart Cupcake') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('Six (6)'),
       t('Twelve (12)'),
       t('Twenty-Four (24)'),
@@ -186,6 +190,7 @@ function _second_dropdown_options($key = '') {
     ),
     t('Brownie Sandwich') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('Six (6)'),
       t('Twelve (12)'),
       t('Twenty-Four (24)'),
@@ -204,6 +209,7 @@ function _third_dropdown_options($key = '') {
   $options = array(
     t('Sheet') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('White'),
       t('Chocolate'),
       t('Marble'),
@@ -213,6 +219,7 @@ function _third_dropdown_options($key = '') {
     ),
     t('Dancer') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('White'),
       t('Chocolate'),
       t('Marble'),
@@ -222,6 +229,7 @@ function _third_dropdown_options($key = '') {
     ),
     t('Round') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('White'),
       t('Chocolate'),
       t('Marble'),
@@ -230,6 +238,7 @@ function _third_dropdown_options($key = '') {
     ),
     t('Pull-Apart Cupcake') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('White'),
       t('Chocolate'),
       t('Variety'),
@@ -237,6 +246,7 @@ function _third_dropdown_options($key = '') {
     ),
     t('Brownie Sandwich') => drupal_map_assoc(
     array(
+      t('- Select a value -'),
       t('White'),
       t('Chocolate'),
       t('Variety'),
