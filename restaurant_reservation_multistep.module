@@ -23,7 +23,7 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
       '#title' => t('I certify that this is fresh!'),
     );
 
-    drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_cake_type']['#language'], TRUE) .'</pre>');
+    drupal_set_message('<pre>'. print_r($form_state['values'], TRUE) .'</pre>');
     drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_cake_type']['und'][0]['value'], TRUE) .'</pre>');
     // drupal_set_message('<pre>'. print_r($form_state, 1) .'</pre>');
     $form["field_reservation_cake_type"][$form["field_reservation_cake_type"]['#language']]['#ajax'] = array(
