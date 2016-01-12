@@ -125,6 +125,21 @@ function restaurant_reservation_multistep_cake_size_callback($form, $form_state)
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
+function restaurant_reservation_multistep_cake_flavor_callback($form, $form_state) {
+  $commands[] = ajax_command_insert('#cake-fillings-replace', drupal_render($form['cake_fillings']));
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+function restaurant_reservation_multistep_cake_filling_callback($form, $form_state) {
+  $commands[] = ajax_command_insert('#cake-icings-replace', drupal_render($form['cake_icings']));
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+function restaurant_reservation_multistep_cake_icing_callback($form, $form_state) {
+  $commands[] = ajax_command_insert('#cake-designs-replace', drupal_render($form['cake_designs']));
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
 function _first_dropdown_options() {
   // drupal_map_assoc() just makes an array('String' => 'String'...).
   return drupal_map_assoc(
