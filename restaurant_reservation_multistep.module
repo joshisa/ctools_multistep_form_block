@@ -23,8 +23,8 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
       '#title' => t('I certify that this is fresh!'),
     );
 
-    drupal_set_message('<pre>'. print_r($form_state['inputs'], 1) .'</pre>');
-    drupal_set_message('<pre>'. print_r($form_state, 1) .'</pre>');
+    drupal_set_message('<pre>'. print_r($form_state['inputs']['field_reservation_cake_type'], 1) .'</pre>');
+    // drupal_set_message('<pre>'. print_r($form_state, 1) .'</pre>');
     $form["field_reservation_cake_type"][$form["field_reservation_cake_type"]['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
