@@ -11,18 +11,243 @@
  * Implementation of hook_form_alter()
  */
 function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form_id){
-  dsm($form);
-  dsm($form_id);
+  //dsm($form);
+  //dsm($form_id);
   // Check when the right form is passed
   if ($form_id == 'eck__entity__form_add_reservation_reservation') {
+    $options_first = _first_dropdown_options();
+    $selected = isset($form_state['values']['field_reservation_cake_size']) ? $form_state['values']['field_reservation_cake_size'] : key($options_first);
     // Add the check box
     $form['certify'] = array(
       '#type' => 'checkbox',
-      '#title' => t('I certify that this is awesome'),
+      '#title' => t('I certify that this is awesome yo'),
     );
 
-    drupal_set_message('<pre>'. print_r($form, 1) .'</pre>');
-    $form["field_reservation_cake_type"][$form["field_reservation_cake_type"]['#language']]['#title'] = t('Rock on!');
-    //$form['field_reservation_cake_type[und]'][$form['field_reservation_cake_type[und]']['#language']]['#size'] = '20';
+    // drupal_set_message('<pre>'. print_r($form, 1) .'</pre>');
+    $form["field_reservation_cake_type"][$form["field_reservation_cake_type"]['#language']]['#ajax'] = array(
+      // When 'event' occurs, Drupal will perform an ajax request in the
+      // background. Usually the default value is sufficient (eg. change for
+      // select elements), but valid values include any jQuery event,
+      // most notably 'mousedown', 'blur', and 'submit'.
+      // 'event' => 'change',
+      'callback' => 'restaurant_reservation_multistep_cake_type_callback',
+      'wrapper' => 'cake-size-replace',
+    );
+
+    $form["field_reservation_cake_size"][$form["field_reservation_cake_size"]['#language']]['#description'] = t('Test Description');
+    $form["field_reservation_cake_size"][$form["field_reservation_cake_size"]['#language']]['#prefix'] = '<div id="cake-size-replace">';
+    $form["field_reservation_cake_size"][$form["field_reservation_cake_size"]['#language']]['#suffix'] = '</div>';
+    $form["field_reservation_cake_size"][$form["field_reservation_cake_size"]['#language']]['#options'] = _second_dropdown_options($selected);
+    $form["field_reservation_cake_size"][$form["field_reservation_cake_size"]['#language']]['#default'] = 0;
+    $form["field_reservation_cake_size"][$form["field_reservation_cake_size"]['#language']]['#ajax'] = array(
+      // When 'event' occurs, Drupal will perform an ajax request in the
+      // background. Usually the default value is sufficient (eg. change for
+      // select elements), but valid values include any jQuery event,
+      // most notably 'mousedown', 'blur', and 'submit'.
+      // 'event' => 'change',
+      'callback' => 'restaurant_reservation_multistep_cake_size_callback',
+      'wrapper' => 'cake-flavors-replace',
+    );
+
   }
+}
+
+
+function restaurant_reservation_multistep_cake_type_callback($form, $form_state) {
+  return $form["field_reservation_cake_size"];
+}
+
+function restaurant_reservation_multistep_cake_size_callback($form, $form_state) {
+  $commands[] = ajax_command_insert('#cake-flavors-replace', drupal_render($form['cake_flavors']));
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+function _first_dropdown_options() {
+  // drupal_map_assoc() just makes an array('String' => 'String'...).
+  return drupal_map_assoc(
+  array(
+    t('- Select a value -'),
+    t('Sheet'),
+    t('Round'),
+    t('Pull-Apart Cupcake'),
+    t('Dancer'),
+    t('Brownie Sandwich'),
+  )
+  );
+}
+
+function _second_dropdown_options($key = '') {
+  $options = array(
+    t('Sheet') => drupal_map_assoc(
+    array(
+      t('1/4 (16-24 people)'),
+      t('1/2 (32-48 people)'),
+      t('Full (64-96 people)'),
+    )
+    ),
+    t('Dancer') => drupal_map_assoc(
+    array(
+      t('1/4 (16-24 people)'),
+      t('1/2 (32-48 people)'),
+      t('Full (64-96 people)'),
+    )
+    ),
+    t('Round') => drupal_map_assoc(
+    array(
+      t('Single Layer (6-10 people)'),
+      t('Double Layer (8-12 people)'),
+    )
+    ),
+    t('Pull-Apart Cupcake') => drupal_map_assoc(
+    array(
+      t('Six (6)'),
+      t('Twelve (12)'),
+      t('Twenty-Four (24)'),
+    )
+    ),
+    t('Brownie Sandwich') => drupal_map_assoc(
+    array(
+      t('Six (6)'),
+      t('Twelve (12)'),
+      t('Twenty-Four (24)'),
+    )
+    ),
+  );
+  if (isset($options[$key])) {
+    return $options[$key];
+  }
+  else {
+    return array(t('- Select a value -'));
+  }
+}
+
+function _third_dropdown_options($key = '') {
+  $options = array(
+    t('Sheet') => drupal_map_assoc(
+    array(
+      t('White'),
+      t('Chocolate'),
+      t('Marble'),
+      t('Yellow'),
+      t('Red Velvet')
+    )
+    ),
+    t('Dancer') => drupal_map_assoc(
+    array(
+      t('White'),
+      t('Chocolate'),
+      t('Marble'),
+      t('Yellow'),
+      t('Red Velvet')
+    )
+    ),
+    t('Round') => drupal_map_assoc(
+    array(
+      t('White'),
+      t('Chocolate'),
+      t('Marble'),
+      t('Red Velvet')
+    )
+    ),
+    t('Pull-Apart Cupcake') => drupal_map_assoc(
+    array(
+      t('White'),
+      t('Chocolate'),
+      t('Variety'),
+    )
+    ),
+    t('Brownie Sandwich') => drupal_map_assoc(
+    array(
+      t('White'),
+      t('Chocolate'),
+      t('Variety'),
+    )
+    ),
+  );
+  if (isset($options[$key])) {
+    return $options[$key];
+  }
+  else {
+    return array(t('- Select a value -'));
+  }
+}
+
+function _fourth_dropdown_options($key = '') {
+  $options = array(
+    t('Sheet') => drupal_map_assoc(
+    array(
+      t('Bavarian Cream'),
+      t('Raspberry'),
+      t('Lemon'),
+      t('Cherry'),
+      t('Chocolate'),
+      t('Cream Cheese'),
+      t('Strawberry'),
+      t('White'),
+    )
+    ),
+    t('Dancer') => drupal_map_assoc(
+    array(
+      t('Bavarian Cream'),
+      t('Raspberry'),
+      t('Lemon'),
+      t('Chocolate'),
+      t('White'),
+    )
+    ),
+    t('Round') => drupal_map_assoc(
+    array(
+      t('Bavarian Cream'),
+      t('Raspberry'),
+      t('Lemon'),
+      t('Cherry'),
+      t('Chocolate'),
+      t('Cream Cheese'),
+      t('Strawberry'),
+      t('White'),
+    )
+    ),
+    t('Pull-Apart Cupcake') => drupal_map_assoc(
+    array(
+      t('N/A'),
+    )
+    ),
+    t('Brownie Sandwich') => drupal_map_assoc(
+    array(
+      t('Vanilla Ice Cream'),
+      t('Vanilla Yogurt'),
+      t('Chocolate Vanilla Swirl'),
+      t('Strawberry Ice Cream'),
+      t('French Vanilla Ice Cream'),
+    )
+    ),
+  );
+  if (isset($options[$key])) {
+    return $options[$key];
+  }
+  else {
+    return array(t('- Select a value -'));
+  }
+}
+
+function _fifth_dropdown_options() {
+  // drupal_map_assoc() just makes an array('String' => 'String'...).
+  return drupal_map_assoc(
+  array(
+    t('White Icing (Ask about other colors)'),
+    t('Chocolate Icing'),
+    t('Whipped Topping'),
+    t('Cream Cheese Icing'),
+  )
+  );
+}
+
+function _sixth_dropdown_options() {
+  // drupal_map_assoc() just makes an array('String' => 'String'...).
+  return drupal_map_assoc(
+  array(
+    t('Character Design'),
+    t('Theme Design'),
+  )
+  );
 }
