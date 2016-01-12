@@ -6,35 +6,6 @@
  * Author:  joshisa@us.ibm.com
  */
 
-/**
- * Implements hook_block_info().
- */
-function restaurant_reservation_multistep_block_info() {
-  $blocks = array();
-  $blocks['restaurant_reservation_multistep'] = array(
-    'info' => t('MultiStep Form'),
-    'cache' => DRUPAL_NO_CACHE,
-  );
-  return $blocks;
-}
-
-/**
- * Implements hook_block_view.
- */
-function restaurant_reservation_multistep_block_view($delta = '') {
-  $block = array();
-
-  switch ($delta) {
-    case 'restaurant_reservation_multistep':
-        $block['subject'] = '';
-        $block['content'] = _restaurant_reservation_multistep_block_content();
-        break;
-    default:
-        $block['subject'] = '';
-        $block['content'] = t('Uh oh! Bullseye\'s designer has gone on vacation!');
-  }
-  return $block;
-}
 
 /*
  * Implementation of hook_form_alter()
@@ -42,20 +13,11 @@ function restaurant_reservation_multistep_block_view($delta = '') {
 function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form_id){
   dsm($form_id);
   // Check when the right form is passed
-  if ($form_id == 'Reservation form') {
+  if ($form_id == 'eck__entity__form_add_reservation_reservation') {
     // Add the check box
     $form['certify'] = array(
       '#type' => 'checkbox',
       '#title' => t('I certify that this is my true name'),
     );
   }
-}
-
-
-
-function _restaurant_reservation_multistep_block_content() {
-  $output = t('Hello World!');
-  // $cakeform = drupal_get_form('cake_designer_form');
-  // $output = drupal_render($cakeform);
-  return $output;
 }
