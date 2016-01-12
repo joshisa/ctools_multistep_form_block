@@ -15,16 +15,13 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
   dsm($form_id);
   // Check when the right form is passed
   if ($form_id == 'eck__entity__form_add_reservation_reservation') {
-    dsm($form);
-    dsm($form_id);
     // Add the check box
     $form['certify'] = array(
       '#type' => 'checkbox',
       '#title' => t('I certify that this is awesome'),
     );
 
-    //$form['edit-field-reservation-cake-type-und'][0]['#value'] = t('Rock out!');
-    //$form['edit-field-reservation-cake-type-und'][0]['#description'] = t('Rock out!');
+    $form['field_reservation_cake_type[und]'][$form['field_reservation_cake_type[und]']['#language']]['#size'] = '20';
 
   }
 }
