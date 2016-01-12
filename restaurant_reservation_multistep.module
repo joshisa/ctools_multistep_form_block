@@ -11,6 +11,7 @@
  * Implementation of hook_form_alter()
  */
 function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form_id){
+  dsm($form);
   dsm($form_id);
   // Check when the right form is passed
   if ($form_id == 'eck__entity__form_add_reservation_reservation') {
@@ -21,3 +22,5 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     );
   }
 }
+
+?>
