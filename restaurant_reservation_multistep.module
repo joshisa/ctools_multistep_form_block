@@ -21,7 +21,6 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
       '#title' => t('I certify that this is awesome'),
     );
 
-    $form['field_reservation_cake_type[und]'][$form['field_reservation_cake_type[und]']['#language']]['#size'] = '20';
-
+    //$form['field_reservation_cake_type[und]'][$form['field_reservation_cake_type[und]']['#language']]['#size'] = '20';
   }
 }
