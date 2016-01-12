@@ -24,7 +24,7 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     );
     */
     // drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_cake_type'][$form['field_reservation_cake_type']['#language']][0]['value'], TRUE) .'</pre>');
-    drupal_set_message('<pre>'. print_r($form['field_reservation_cake_size'], 1) .'</pre>');
+    // drupal_set_message('<pre>'. print_r($form['field_reservation_cake_size'], 1) .'</pre>');
     $form["field_reservation_cake_type"][$form["field_reservation_cake_type"]['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
@@ -58,7 +58,7 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_flavors'][$form['field_reservation_cake_type']['#language']]['#options'] = _third_dropdown_options($selected);
     $form['field_reservation_cake_flavors'][$form['field_reservation_cake_type']['#language']]['#default'] = isset($form_state['values']['field_reservation_cake_flavors']) ? $form_state['values']['field_reservation_cake_flavors'] : '';
     //$form['field_reservation_cake_flavors'][$form['field_reservation_cake_type']['#language']]['#required'] = TRUE;
-    //$form['field_reservation_cake_flavors'][$form['field_reservation_cake_type']['#language']]['#validated'] = TRUE;
+    $form['field_reservation_cake_flavors']['#validated'] = TRUE;
     $form['field_reservation_cake_flavors'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
@@ -76,7 +76,7 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_fillings'][$form['field_reservation_cake_type']['#language']]['#options'] = _fourth_dropdown_options($selected);
     $form['field_reservation_cake_fillings'][$form['field_reservation_cake_type']['#language']]['#default'] = isset($form_state['values']['field_reservation_cake_fillings']) ? $form_state['values']['field_reservation_cake_fillings'] : '';
     //$form['field_reservation_cake_fillings'][$form['field_reservation_cake_type']['#language']]['#required'] = TRUE;
-    //$form['field_reservation_cake_fillings'][$form['field_reservation_cake_type']['#language']]['#validated'] = TRUE;
+    $form['field_reservation_cake_fillings']['#validated'] = TRUE;
     $form['field_reservation_cake_fillings'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
@@ -93,7 +93,7 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#options'] = _fifth_dropdown_options($selected);
     $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#default'] = isset($form_state['values']['field_reservation_cake_icing']) ? $form_state['values']['field_reservation_cake_icing'] : '';
     //$form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#required'] = TRUE;
-    //$form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#validated'] = TRUE;
+    $form['field_reservation_cake_icing']['#validated'] = TRUE;
     $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
@@ -110,7 +110,7 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#options'] = _sixth_dropdown_options($selected);
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#default'] = isset($form_state['values']['field_reservation_cake_design']) ? $form_state['values']['field_reservation_cake_design'] : '';
     //$form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#required'] = TRUE;
-    //$form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#validated'] = TRUE;
+    $form['field_reservation_cake_design']['#validated'] = TRUE;
 /*
     $form['field_reservation_cake_design'][$form['field_reservation_cake_design']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
