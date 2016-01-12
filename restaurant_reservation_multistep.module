@@ -51,7 +51,6 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     );
 
     $form['field_reservation_cake_flavor'][$form['field_reservation_cake_type']['#language']]['#description'] = t('Cake Flavor');
-    /*
     $form['field_reservation_cake_flavor'][$form['field_reservation_cake_type']['#language']]['#prefix'] = '<div id="cake-flavor-replace">';
     $form['field_reservation_cake_flavor'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
     $form['field_reservation_cake_flavor'][$form['field_reservation_cake_type']['#language']]['#options'] = _third_dropdown_options($selected);
@@ -101,7 +100,7 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#options'] = _sixth_dropdown_options($selected);
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#default'] = 0;
-
+/*
     $form['field_reservation_cake_design'][$form['field_reservation_cake_design']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
@@ -122,25 +121,25 @@ function restaurant_reservation_multistep_cake_type_callback($form, $form_state)
 }
 
 function restaurant_reservation_multistep_cake_size_callback($form, $form_state) {
-  $commands[] = ajax_command_insert('#cake-flavors-replace', drupal_render($form['cake_flavors']));
-  $commands[] = ajax_command_insert('#cake-fillings-replace', drupal_render($form['cake_fillings']));
-  $commands[] = ajax_command_insert('#cake-icings-replace', drupal_render($form['cake_icings']));
-  $commands[] = ajax_command_insert('#cake-designs-replace', drupal_render($form['cake_designs']));
+  $commands[] = ajax_command_insert('#cake-flavor-replace', drupal_render($form['cake_flavors']));
+  //$commands[] = ajax_command_insert('#cake-fillings-replace', drupal_render($form['cake_fillings']));
+  //$commands[] = ajax_command_insert('#cake-icings-replace', drupal_render($form['cake_icings']));
+  //$commands[] = ajax_command_insert('#cake-designs-replace', drupal_render($form['cake_designs']));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
 function restaurant_reservation_multistep_cake_flavor_callback($form, $form_state) {
-  $commands[] = ajax_command_insert('#cake-fillings-replace', drupal_render($form['cake_fillings']));
+  $commands[] = ajax_command_insert('#cake-filling-replace', drupal_render($form['cake_fillings']));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
 function restaurant_reservation_multistep_cake_filling_callback($form, $form_state) {
-  $commands[] = ajax_command_insert('#cake-icings-replace', drupal_render($form['cake_icings']));
+  $commands[] = ajax_command_insert('#cake-icing-replace', drupal_render($form['cake_icings']));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
 function restaurant_reservation_multistep_cake_icing_callback($form, $form_state) {
-  $commands[] = ajax_command_insert('#cake-designs-replace', drupal_render($form['cake_designs']));
+  $commands[] = ajax_command_insert('#cake-design-replace', drupal_render($form['cake_designs']));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
