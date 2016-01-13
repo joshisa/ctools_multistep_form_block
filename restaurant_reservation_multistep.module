@@ -121,7 +121,7 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
       'wrapper' => 'cake-message-replace',
     );
     drupal_set_message('<pre>'. print_r($form['field_reservation_message'], 1) . '</pre>');
-    drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_message'], 1) . '</pre>');
+    drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_message']['und'][0]['value'], 1) . '</pre>');
 
   }
 }
@@ -152,8 +152,8 @@ function restaurant_reservation_multistep_cake_icing_callback($form, $form_state
 }
 
 function restaurant_reservation_multistep_cake_design_callback($form, $form_state) {
-  # $form['field_reservation_message'][$form['field_reservation_cake_type']['#language']]['#value'] = t('Nada');
-  $commands[] = ajax_command_insert('#cake-message-replace', drupal_render($form['field_reservation_message']['#value']));
+  $form_state['values']['field_reservation_message']['und'][0]['value'] = t('Nada');
+  $commands[] = ajax_command_insert('#cake-message-replace', drupal_render($form_state['values']['field_reservation_message']['und'][0]['value']));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
