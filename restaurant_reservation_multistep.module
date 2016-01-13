@@ -120,8 +120,12 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
       'callback' => 'restaurant_reservation_multistep_cake_design_callback',
       'wrapper' => 'cake-message-replace',
     );
-    drupal_set_message('<pre>'. print_r($form['field_reservation_message'], 1) . '</pre>');
-    # drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_message']['und'][0]['value'], 1) . '</pre>');
+  // if (isset($form_state['values']['field_reservation_cake_type'])) {
+//      drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_cake_type'][$form['field_reservation_cake_type']['#language']][0]['value'], 1) .'</pre>');
+//      $form_state['values']['field_reservation_message'][$form['field_reservation_message']['#language']][0]['value'] .= t('Nada')."\r\n";
+//    }
+    # drupal_set_message('<pre>'. print_r($form['field_reservation_message'], 1) . '</pre>');
+    drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_message']['und'][0]['value'], 1) . '</pre>');
 
   }
 }
@@ -157,10 +161,6 @@ function restaurant_reservation_multistep_cake_design_callback($form, $form_stat
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
-// if (isset($form_state['values']['field_reservation_cake_type'])) {
-//      drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_cake_type'][$form['field_reservation_cake_type']['#language']][0]['value'], 1) .'</pre>');
-//      $form_state['values']['field_reservation_message'][$form['field_reservation_message']['#language']][0]['value'] .= t('Nada')."\r\n";
-//    }
 
 function _first_dropdown_options() {
   // drupal_map_assoc() just makes an array('String' => 'String'...).
