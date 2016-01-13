@@ -40,10 +40,6 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_size'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
     $form['field_reservation_cake_size'][$form['field_reservation_cake_type']['#language']]['#options'] = isset($form_state['values']['field_reservation_cake_type']) ? _second_dropdown_options($selected): array();
     $form['field_reservation_cake_size'][$form['field_reservation_cake_type']['#language']]['#default'] = isset($form_state['values']['field_reservation_cake_size']) ? $form_state['values']['field_reservation_cake_size'] : '';
-    if (isset($form_state['values']['field_reservation_cake_type'])) {
-      drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_cake_type'][$form['field_reservation_cake_type']['#language']][0]['value'], 1) .'</pre>');
-      $form_state['values']['field_reservation_message'][$form['field_reservation_message']['#language']][0]['value'] .= t('Nada')."\r\n";
-    }
     $form['field_reservation_cake_size']['#validated'] = TRUE;
     $form['field_reservation_cake_size'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
@@ -114,7 +110,6 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#default'] = isset($form_state['values']['field_reservation_cake_design']) ? $form_state['values']['field_reservation_cake_design'] : '';
     //$form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#required'] = TRUE;
     $form['field_reservation_cake_design']['#validated'] = TRUE;
-    /*
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
       // background. Usually the default value is sufficient (eg. change for
@@ -125,7 +120,6 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
       'callback' => 'restaurant_reservation_multistep_cake_design_callback',
       'wrapper' => 'cake-message-replace',
     );
-     */
 
   }
 }
@@ -154,6 +148,17 @@ function restaurant_reservation_multistep_cake_icing_callback($form, $form_state
   $commands[] = ajax_command_insert('#cake-design-replace', drupal_render($form['field_reservation_cake_design']));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
+
+function restaurant_reservation_multistep_cake_design_callback($form, $form_state) {
+  $form['field_reservation_message']['#value'] = t('Nada');
+  $commands[] = ajax_command_insert('#cake-message-replace', drupal_render($form['field_reservation_message']['#value']));
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+// if (isset($form_state['values']['field_reservation_cake_type'])) {
+//      drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_cake_type'][$form['field_reservation_cake_type']['#language']][0]['value'], 1) .'</pre>');
+//      $form_state['values']['field_reservation_message'][$form['field_reservation_message']['#language']][0]['value'] .= t('Nada')."\r\n";
+//    }
 
 function _first_dropdown_options() {
   // drupal_map_assoc() just makes an array('String' => 'String'...).
