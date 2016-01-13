@@ -111,7 +111,8 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#default'] = isset($form_state['values']['field_reservation_cake_design']) ? $form_state['values']['field_reservation_cake_design'] : '';
     //$form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#required'] = TRUE;
     $form['field_reservation_cake_design']['#validated'] = TRUE;
-    drupal_set_message('<pre>'. print_r($form['field_reservation_message'], 1) .'</pre>');
+    $foobar = isset($form_state['values']['field_reservation_message'][$form['field_reservation_message']['#language']][0]['value']) ? $form_state['values']['field_reservation_message'][$form['field_reservation_message']['#language']][0]['value'] : t('Nada');
+    drupal_set_message('<pre>'. print_r($foobar, 1) .'</pre>');
     /*
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
