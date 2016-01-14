@@ -50,7 +50,6 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_flavors'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
     $form['field_reservation_cake_flavors'][$form['field_reservation_cake_type']['#language']]['#options'] = isset($form_state['values']['field_reservation_cake_size']) ? _third_dropdown_options($selected): array();
     $form['field_reservation_cake_flavors'][$form['field_reservation_cake_type']['#language']]['#default'] = isset($form_state['values']['field_reservation_cake_flavors']) ? $form_state['values']['field_reservation_cake_flavors'] : '';
-    //$form['field_reservation_cake_flavors'][$form['field_reservation_cake_type']['#language']]['#required'] = TRUE;
     $form['field_reservation_cake_flavors']['#validated'] = TRUE;
     $form['field_reservation_cake_flavors'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
@@ -68,7 +67,6 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_fillings'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
     $form['field_reservation_cake_fillings'][$form['field_reservation_cake_type']['#language']]['#options'] = isset($form_state['values']['field_reservation_cake_flavors']) ? _fourth_dropdown_options($selected): array();
     $form['field_reservation_cake_fillings'][$form['field_reservation_cake_type']['#language']]['#default'] = isset($form_state['values']['field_reservation_cake_fillings']) ? $form_state['values']['field_reservation_cake_fillings'] : '';
-    //$form['field_reservation_cake_fillings'][$form['field_reservation_cake_type']['#language']]['#required'] = TRUE;
     $form['field_reservation_cake_fillings']['#validated'] = TRUE;
     $form['field_reservation_cake_fillings'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
@@ -85,7 +83,6 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
     $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#options'] = isset($form_state['values']['field_reservation_cake_fillings']) ? _fifth_dropdown_options($selected): array();
     $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#default'] = isset($form_state['values']['field_reservation_cake_icing']) ? $form_state['values']['field_reservation_cake_icing'] : '';
-    //$form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#required'] = TRUE;
     $form['field_reservation_cake_icing']['#validated'] = TRUE;
     $form['field_reservation_cake_icing'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
@@ -102,7 +99,6 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#options'] = isset($form_state['values']['field_reservation_cake_icing']) ? _sixth_dropdown_options($selected): array();
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#default'] = isset($form_state['values']['field_reservation_cake_design']) ? $form_state['values']['field_reservation_cake_design'] : '';
-    //$form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#required'] = TRUE;
     $form['field_reservation_cake_design']['#validated'] = TRUE;
     $form['field_reservation_cake_design'][$form['field_reservation_cake_type']['#language']]['#ajax'] = array(
       // When 'event' occurs, Drupal will perform an ajax request in the
@@ -114,20 +110,15 @@ function restaurant_reservation_multistep_form_alter(&$form, &$form_state, $form
       'callback' => 'restaurant_reservation_multistep_cake_design_callback',
       'wrapper' => 'cake-message-replace',
     );
-  // if (isset($form_state['values']['field_reservation_cake_type'])) {
-//      drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_cake_type'][$form['field_reservation_cake_type']['#language']][0]['value'], 1) .'</pre>');
-//      $form_state['values']['field_reservation_message'][$form['field_reservation_message']['#language']][0]['value'] .= t('Nada')."\r\n";
-//    }
-    # drupal_set_message('<pre>'. print_r($form['field_reservation_message'], 1) . '</pre>');
     $form['field_reservation_message'][$form['field_reservation_cake_type']['#language']]['#prefix'] = '<div id="cake-message-replace">';
     $form['field_reservation_message'][$form['field_reservation_cake_type']['#language']]['#suffix'] = '</div>';
-    // drupal_set_message('<pre>'. print_r($form_state['values']['field_reservation_message']['und'][0]['value'], 1) . '</pre>');
 
   }
 }
 
 
 function restaurant_reservation_multistep_cake_type_callback($form, $form_state) {
+  drupal_set_message(t("Bullseye Baker\'s TIP:\r\nAfter every slice, wipe off the knife for a more pristine cut."));
   return $form["field_reservation_cake_size"];
 }
 
@@ -152,6 +143,7 @@ function restaurant_reservation_multistep_cake_icing_callback($form, $form_state
 }
 
 function restaurant_reservation_multistep_cake_design_callback($form, $form_state) {
+  drupal_set_message(t("Bullseye Baker\'s TIP:\r\nFree Smash Cake for first birthdays!"));
   $orderDetails = 
     t('Cake Designer Details:')."\r\n"
     .t('  Cake Type: ')
@@ -232,7 +224,7 @@ function _second_dropdown_options($key = '') {
     return $options[$key];
   }
   else {
-    return array(t('- Select a value -'));
+    return array(t('How many mouths to feed?'));
   }
 }
 
@@ -288,7 +280,7 @@ function _third_dropdown_options($key = '') {
     return $options[$key];
   }
   else {
-    return array(t('- Select a value -'));
+    return array(t('Choose your flavor ...'));
   }
 }
 
@@ -359,7 +351,7 @@ function _fifth_dropdown_options() {
   // drupal_map_assoc() just makes an array('String' => 'String'...).
   return drupal_map_assoc(
   array(
-    t('Romance is the icing, but love is the cake. - Julia Child'),
+    t('Romance is the icing and love is the cake. - Julia Child'),
     t('White Icing (Ask about other colors)'),
     t('Chocolate Icing'),
     t('Whipped Topping'),
@@ -372,7 +364,7 @@ function _sixth_dropdown_options() {
   // drupal_map_assoc() just makes an array('String' => 'String'...).
   return drupal_map_assoc(
   array(
-    t('TIP:  Free Smash Cake for first birthdays!'),
+    t('What cake design/theme did you have in mind?'),
     t('Character Design'),
     t('Theme Design'),
   )
