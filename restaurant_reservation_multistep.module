@@ -158,7 +158,20 @@ function restaurant_reservation_multistep_cake_icing_callback($form, $form_state
 }
 
 function restaurant_reservation_multistep_cake_design_callback($form, $form_state) {
-  $orderDetails = t('Cake Type:').nl2br("\r\n").$form_state['values']['field_reservation_cake_type'][$form['field_reservation_cake_type']['#language']][0]['value'].t('Cake Size:')."\r\n".t('Twelve (12)').t('Cake Flavor:')."\r\n".t('Chocolate').t('Cake Filling:')."\r\n".t('N/A').t('Cake Icing:')."\r\n".t('Chocolate Icing').t('Cake Design:')."\r\n".t('Theme Design');
+  $orderDetails = 
+    t('Cake Type:')."\r\n"
+    .$form_state['values']['field_reservation_cake_type'][$form['field_reservation_cake_type']['#language']][0]['value']."\r\n"
+    .t('Cake Size:')."\r\n"
+    .$form_state['values']['field_reservation_cake_size'][$form['field_reservation_cake_size']['#language']][0]['value']."\r\n"
+    .t('Cake Flavor:')."\r\n"
+    .$form_state['values']['field_reservation_cake_flavors'][$form['field_reservation_cake_flavors']['#language']][0]['value']."\r\n"
+    .t('Cake Filling:')."\r\n"
+    .$form_state['values']['field_reservation_cake_fillings'][$form['field_reservation_cake_fillings']['#language']][0]['value']."\r\n"
+    .t('Cake Icing:')."\r\n"
+    .$form_state['values']['field_reservation_cake_icing'][$form['field_reservation_cake_icing']['#language']][0]['value']."\r\n"
+    .t('Cake Design:')."\r\n"
+    .$form_state['values']['field_reservation_cake_design'][$form['field_reservation_cake_design']['#language']][0]['value']."\r\n";
+
   $form['field_reservation_message']['und'][0]['value']['#value'] = $orderDetails;
   return $form['field_reservation_message'];
   //$commands[] = ajax_command_insert('#cake-message-replace', drupal_render($form['field_reservation_message']));
